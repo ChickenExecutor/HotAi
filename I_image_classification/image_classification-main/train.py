@@ -12,8 +12,8 @@ from data_loader import get_train_test_data
 from model import MyModel
 from config import current_dir, model_checkpoint_file, model_best_checkpoint
 
-### STUDENT NAME:
-### STUDENT IDENTIFIER (U****):
+### STUDENT NAME: Keanu Seiraffi
+### STUDENT IDENTIFIER (U****): ubhqg
 ### COLLABORATION WITH:
 
 # if you are using a device with one or multiple GPU(s), employment of such may speed up computations
@@ -21,14 +21,13 @@ from config import current_dir, model_checkpoint_file, model_best_checkpoint
 # you can check device availability with the following lines of code:
 ### torch.cuda.device_count()
 # if a value greater than 0 is returned, a GPU is available for use with pytorch
-DEVICE = "cpu"
+DEVICE = "cuda"
 
 # TO DO: find appropriate training hyperparameters
 # YOUR CODE HERE
-# epochs = -1
-# learning_rate = -1
-# batch_size = -1
-
+epochs = 100
+learning_rate = 0.001
+batch_size = 100
 
 class State:
     best_acc = 0
@@ -52,6 +51,11 @@ def predict(model: nn.Module, dl: torch.utils.data.DataLoader, show_progress=Tru
         # TO DO: pass images through model, reformat predictions and write them to the preds list:
         # The preds is a list of all class predictions for the processed images. For each image passed through the model, it contains a single integer indicating the predicted class.
         # YOUR CODE HERE
+        outputs = model(images)
+        if isinstance(outputs, (tuple, list)):
+            outputs = outputs[0]
+        batch_preds = outputs.argmax(dim=1)
+        preds += batch_preds.cpu().tolist()
 
     return torch.as_tensor(truth), torch.as_tensor(preds)
 
