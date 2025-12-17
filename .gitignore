@@ -190,4 +190,4 @@ fabric.properties
 */weights/
 *.zip
 *.pkl
-II_transformer_network/data/dataset_preprocessed.pkl
+./II_transformer_network/data/dataset_preprocessed.pkl
