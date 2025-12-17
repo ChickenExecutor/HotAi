@@ -1,4 +1,8 @@
 import torch
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model import decoder
 
@@ -43,3 +47,7 @@ def test_decoder():
 
     output_sequence = decoder_inst(output_sequence, encoder_output, masks, None)
     assert output_sequence.shape == (batch_size, sequence_length, model_size)
+
+test_decoder_layer()
+test_decoder()
+print("tests passed")

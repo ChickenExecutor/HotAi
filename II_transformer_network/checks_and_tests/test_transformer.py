@@ -1,4 +1,8 @@
 import torch
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model.transformer_model import TransformerModel
 
@@ -23,3 +27,6 @@ def test_transformer():
     transformer_output = transformer_model(encoder_input, decoder_output)
 
     assert transformer_output.shape == (batch_size, sequence_length_out, voc_size)
+
+test_transformer()
+print("Tests passed")

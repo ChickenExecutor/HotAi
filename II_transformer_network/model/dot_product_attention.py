@@ -29,6 +29,8 @@ class DotProductAttention:
 
         # YOUR CODE HERE
         # 1) Apply softmax function to obtain weights for values (summing to 1.0)
+        weights = self.softmax(scores)
         # 2) Computed weighted sum of the values according to computed weights
+        weighted_values = torch.matmul(weights, values)
 
         return weighted_values

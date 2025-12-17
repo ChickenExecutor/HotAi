@@ -22,10 +22,22 @@ class EncoderLayer(torch.nn.Module):
     def forward(self, x, padding_mask):
         # YOUR CODE HERE
         # 1) compute multihead self-attention
+        residual = x
+        x = self.multihead_attention(x, x, x, padding_mask)
         # 2) apply dropout
+        x = self.dropout_1(x)
         # 3) implement add & norm
+        x = self.norm_1(x + residual)
         # 4) Feed forward part: -> linear layer -> activation -> dropout -> linear layer -> activation -> dropout
+        residual = x
+        x = self.linear_1(x)
+        x = self.activation_1(x)
+        x = self.dropout_2(x)
+        x = self.linear_2(x)
+        x = self.activation_2(x)
+        x = self.dropout_3(x)
         # 5) add & norm
+        layer_output = self.norm_2(x + residual)
         return layer_output
 
 

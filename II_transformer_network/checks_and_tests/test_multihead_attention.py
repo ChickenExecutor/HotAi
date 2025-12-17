@@ -1,4 +1,8 @@
 import torch
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model.multi_head_attention import MultiHeadAttention
 
@@ -31,3 +35,5 @@ def test_multihead_attention():
     output = multihead_attention(queries, keys, values, mask=mask)
     assert type(output) is torch.Tensor
     assert output.shape == (batch_size, sequence_length, dim_model)
+    print("test passed")
+test_multihead_attention()

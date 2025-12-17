@@ -1,9 +1,12 @@
-### STUDENT NAME:
-### STUDENT IDENTIFIER (U****):
+### STUDENT NAME: Keanu Seiraffi
+### STUDENT IDENTIFIER (U****):ubhqg
 ### COLLABORATION WITH:
 
 import gc
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import numpy as np
 import numpy.random
@@ -30,8 +33,8 @@ train_ratio = 0.8
 dropout = 0.3
 
 # Configure training (adjust depending on available GPU memory)
-batch_size = 1024
-num_epochs = 20
+batch_size = 64
+num_epochs = 100
 
 # Large model version: trains several hours on GPU
 model_config_large = ModelConfig(num_heads=8,
@@ -52,8 +55,8 @@ model_config_small = ModelConfig(num_heads=2,
                                  num_decoder_layers=1)
 
 # Use either version - or build your own model!
-# model_config = model_config_large
-model_config = model_config_small
+model_config = model_config_large
+#model_config = model_config_small
 
 
 def run_on_batch(model: TransformerModel, data_x: torch.LongTensor, data_y: torch.LongTensor, loss_fn,

@@ -8,6 +8,10 @@ def build_model_for_data(source_seq_length, target_seq_length, source_vocab, tar
     source_v_size = len(source_vocab)
     target_v_size = len(target_vocab)
 
+    # Increase sequence lengths to allow for longer generations in inference
+    source_seq_length = max(source_seq_length, 200)
+    target_seq_length = max(target_seq_length, 200)
+
     model = TransformerModel(source_v_size, target_v_size, source_seq_length, target_seq_length,
                              model_config.num_heads, model_config.dim_keys, model_config.dim_values,
                              model_config.dim_model, model_config.dim_feedforward, model_config.num_encoder_layers,

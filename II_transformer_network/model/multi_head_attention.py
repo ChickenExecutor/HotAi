@@ -54,9 +54,19 @@ class MultiHeadAttention(torch.nn.Module):
 
         # YOUR CODE HERE
         # 1) Project queries, keys and values using respective linear projection layers
-        # 2) Use method _expand_heads_and_reorder to reorganize resulting tensors for multihead attention computation
-        # 3) Compute multihead attention
-        # 4) Use method _concat_heads_and_reorder to concatenate the attention heads back together
-        # 5) Apply output projection linear layer to attention results
+        proj_q = self.proj_q(queries)
+        proj_k = self.proj_k(keys)
+        proj_v = self.proj_v(values)
 
+
+        # 2) Use method _expand_heads_and_reorder to reorganize resulting tensors for multihead attention computation
+        q_reorder = self._expand_heads_and_reorder(proj_q)
+        k_reorder = self._expand_heads_and_reorder(proj_k)
+        v_reorder = self._expand_heads_and_reorder(proj_v)
+        # 3) Compute multihead attention
+        attention = self.attention(q_reorder, k_reorder, v_reorder, mask_multihead)
+        # 4) Use method _concat_heads_and_reorder to concatenate the attention heads back together
+        attention_reorder = self._concat_heads_and_reorder(attention)
+        # 5) Apply output projection linear layer to attention results
+        output = self.proj_out(attention_reorder)
         return output

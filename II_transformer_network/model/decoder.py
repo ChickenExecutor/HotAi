@@ -25,13 +25,30 @@ class DecoderLayer(torch.nn.Module):
     def forward(self, x, encoder_output, target_mask, source_mask):
         # YOUR CODE HERE
         # 1) apply masked multihead self-attention
+        residual = x
+        x = self.multihead_attention_1(x, x, x, target_mask)
         # 2) dropout
+        x = self.dropout_1(x)
         # 3) add & norm
+        x = self.norm_1(x + residual)
         # 4) apply masked multihead attention on encoder output (use encoder output as keys, values)
+        residual = x
+        x = self.multihead_attention_2(x, encoder_output, encoder_output, source_mask)
         # 5) dropout
+        x = self.dropout_2(x)
         # 6) add & norm
+        x = self.norm_2(x + residual)
         # 7) implement feed forward part of encoder layer: linear layer -> activation -> dropout -> linear layer -> activation -> dropout
+        residual = x
+        x = self.linear_1(x)
+        x = self.activation_1(x)
+        x = self.dropout_3(x)
+        x = self.linear_2(x)
+        x = self.activation_2(x)
+        x = self.dropout_4(x)
         # 8) add & norm
+        output = self.norm_3(x + residual)
+
 
         return output
 

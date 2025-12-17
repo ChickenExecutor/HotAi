@@ -1,6 +1,10 @@
 import numpy as np
 from numpy import random
 import torch
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model import dot_product_attention
 
@@ -33,3 +37,6 @@ def test_dot_product_attention():
     assert res.shape == (batch_size, 1, sequence_length, dim_v)
     for b in range(batch_size):
         assert np.linalg.norm(abs(res[b, 0, b % sequence_length, :] - values[b, 0, b % sequence_length, :])) < 1e-3
+
+
+test_dot_product_attention()

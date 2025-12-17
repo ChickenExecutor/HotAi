@@ -1,4 +1,8 @@
 import torch
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model.encoder import Encoder, EncoderLayer
 
@@ -45,3 +49,6 @@ def test_encoder():
         print(par[0])
 
     assert encoder_output.shape == (batch_size, sequence_length, model_dim)
+    print("test passed")
+
+test_encoder()

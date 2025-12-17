@@ -1,0 +1,1 @@
+{"num_heads": 2, "dim_keys": 16, "dim_values": 16, "dim_model": 32, "dim_feedforward": 64, "num_encoder_layers": 1, "num_decoder_layers": 1}

@@ -1,6 +1,7 @@
 import os
-
+import sys
 import torch
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from model.model_config import ModelConfig
 from training import eos_token, start_token, get_training_dirs, get_model_state_dict_files, \
@@ -55,6 +56,9 @@ def run_model(model, source_data, source_vocab, target_vocab, max_generated_text
         output_text = decipher_tokens(generated_output, target_vocab)
 
         output_text = " ".join(output_text)
+        output_text = output_text.strip("PAD")
+        output_text = output_text.strip("")
+
         print(f" Output: {output_text}")
 
         if target_data is not None:

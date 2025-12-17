@@ -1,7 +1,8 @@
 import csv
 import os
 
-from training import data_dir, data_file_write_path
+data_dir = os.path.join(os.path.dirname(__file__), "../data")
+data_file_write_path = os.path.join(data_dir, "en-ge-all.csv")
 
 
 def convert_txt_to_pkl(txt_file_path, output_file_path):

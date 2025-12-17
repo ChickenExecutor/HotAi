@@ -17,9 +17,9 @@ training_dir = training_dir_format.format(datetime.datetime.now().strftime("%Y%m
 config_file_name = "model_config.json"
 model_state_dict_file_name = "transformer_model_{}.pkl"
 
-start_token = "<start>"
-eos_token = "<end>"
-pad_token = "<>"
+start_token = "START"
+eos_token = "END"
+pad_token = "PAD"
 
 
 def get_training_dirs():
